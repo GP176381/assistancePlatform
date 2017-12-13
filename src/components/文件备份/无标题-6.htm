@@ -1,0 +1,325 @@
+				<el-col :xs="24" :sm="12" :md="6" :lg="4" v-for="item in form.rereqForm" :key="o" class="text item">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.idcardImg" :src="item.idcardImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">身份证正面</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+		
+		
+		
+				<el-collapse-item name="2">
+						<template slot="title">
+							易地扶贫搬迁补助资格信息<i class="header-icon el-icon-information"></i>
+						</template>
+						<el-form :model="form.ydfpbzForm" :rules="form.ydfpbzRules" ref="form.ydfpbzForm" label-width="150px" class="">
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="8">
+									<el-form-item label="计划实施年度" prop="planYears">
+										<el-select v-model="form.ydfpbzForm.planYears" filterable placeholder="请选择">
+											<el-option v-for="item in form.ydfpbzForm.planYear" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="8">
+									<el-form-item label="安置形式" prop="relocateTypes">
+										<el-select v-model="form.ydfpbzForm.relocateTypes" filterable placeholder="请选择">
+											<el-option v-for="item in form.ydfpbzForm.relocateType" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="8">
+									<el-form-item label="安置方式" prop="relocateModes">
+										<el-col :xs="24" :sm="12" :md="8" :lg="12">
+											<el-select v-model="form.ydfpbzForm.relocateModes" filterable placeholder="请选择">
+												<el-option v-for="item in form.ydfpbzForm.relocateMode" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-col>
+										<el-col :xs="24" :sm="12" :md="8" :lg="12">
+											<el-select v-model="form.ydfpbzForm.relocateModes" filterable placeholder="请选择">
+												<el-option v-for="item in form.ydfpbzForm.relocateMode" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-col>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-form-item label="">
+										<el-checkbox v-model="form.ydfpbzForm.noHouse">是否无房户</el-checkbox>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="8">
+									<el-form-item label="稳定脱贫措施" prop="measures">
+										<el-select v-model="form.ydfpbzForm.measures" filterable placeholder="请选择">
+											<el-option v-for="item in form.ydfpbzForm.measure" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+							</el-row>
+
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="老宅地址" prop="oldAddresss">
+										<el-select v-model="form.ydfpbzForm.oldAddresss" filterable placeholder="请选择">
+											<el-option v-for="item in form.ydfpbzForm.oldAddress" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.oldAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.oldAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.oldAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.oldAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.oldAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.oldAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-input type="text" v-model="form.ydfpbzForm.oldAddresss" auto-complete="off"></el-input>
+								</el-col>
+							</el-row>
+
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="新宅地址" prop="newAddresss">
+										<el-select v-model="form.ydfpbzForm.newAddresss" filterable placeholder="请选择">
+											<el-option v-for="item in form.ydfpbzForm.newAddress" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.newAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.newAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.newAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.newAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.newAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.newAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-input type="text" v-model="form.ydfpbzForm.newAddresss" auto-complete="off"></el-input>
+								</el-col>
+							</el-row>
+						</el-form>
+					</el-collapse-item>
+
+					<el-collapse-item name="3">
+						<template slot="title">
+							申请材料<i class="header-icon el-icon-information"></i>
+						</template>
+						<form :model="form.rereqForm" :rules="form.ydfpbzForm" ref="form.ydfpbzForm" label-width="150px" class="">
+							<el-row :gutter="10" type="flex">
+
+								<el-col :xs="24" :sm="12" :md="6" :lg="4" v-for="item in form.rereqForm" :key="o" class="text item">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.idcardImg" :src="item.idcardImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">身份证正面</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.idcardImg" :src="idcardImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">身份证正面</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.idcardBehindImg" :src="idcardBehindImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">身份证反面</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.hkbImg" :src="hkbImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">户口本</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.bqsqzsImg" :src="bqsqzsImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">搬迁申请证书</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.bqsqzsImg" :src="bqsqzsImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">搬迁申请证书</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.chyjyImg" :src="chyjyImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">村会议纪要</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.chyImg" :src="chyImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">村会议照片</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.cgsImg" :src="cgsImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">村公示照片</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.cgsclImg" :src="cgsclImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">村公示材料</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.bqdxqrbImg" :src="bqdxqrbImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">搬迁对象确认表</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+							</el-row>
+						</form>
+					</el-collapse-item>
+
+					<el-collapse-item name="4">
+						<template slot="title">
+							账户信息<i class="header-icon el-icon-information"></i>
+						</template>
+
+						<el-form :model="form.accountInfoForm" :rules="form.accountInfoRules" ref="form.accountInfoForm" label-width="150px" class="">
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="持卡人/机构" prop="accountOwner">
+										<el-input type="text" v-model="form.accountInfoForm.accountOwner" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="收款人手机" prop="accountPhone">
+										<el-input type="text" v-model="form.accountInfoForm.accountPhone" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="证件号" prop="accountIdcard">
+										<el-input type="text" v-model="form.accountInfoForm.accountIdcard" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="开户银行" prop="accountBanks">
+										<el-select v-model="form.accountInfoForm.accountBanks" filterable placeholder="请选择">
+											<el-option v-for="item in form.accountInfoForm.accountBank" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="银行卡号" prop="accountCardnumber">
+										<el-input type="text" v-model="form.accountInfoForm.accountCardnumber" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="确认卡号" prop="accountCardnumber">
+										<el-input type="text" v-model="form.accountInfoForm.accountCardnumber" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="与户主关系" prop="accountRelations">
+										<el-select v-model="form.accountInfoForm.accountRelations" filterable placeholder="请选择">
+											<el-option v-for="item in form.accountInfoForm.accountRelation" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+							</el-row>
+						</el-form>
+					</el-collapse-item>
+
+					<el-collapse-item name="5">
+						<template slot="title">
+							帮扶责任人<i class="header-icon el-icon-information"></i>
+						</template>
+
+						<el-form :model="form.bfzrrForm" :rules="form.bfzrrRules" ref="form.bfzrrForm" label-width="150px" class="">
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="联系部门" prop="contactLeader">
+										<el-input type="text" v-model="form.bfzrrForm.contactLeader" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="联系人员" prop="contactDepartment">
+										<el-input type="text" v-model="form.bfzrrForm.contactDepartment" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="联系电话" prop="contactPerson">
+										<el-input type="text" v-model="form.bfzrrForm.contactPerson" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+							</el-row>
+						</el-form>
+					</el-collapse-item>

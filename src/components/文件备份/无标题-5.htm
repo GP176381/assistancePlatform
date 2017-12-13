@@ -1,0 +1,161 @@
+<el-collapse-item name="6">
+						<template slot="title">
+							易地扶贫搬迁成员<i class="header-icon el-icon-information"></i>
+						</template>
+
+						<el-row>
+							<el-button type="primary" icon="plus" @click="dialogFormVisible = true">添加</el-button>
+							<el-button type="primary" icon="edit" :disabled="disabled" @click="dialogFormVisible = true">修改</el-button>
+							<el-button type="primary" icon="delete" :disabled="disabled">删除</el-button>
+						</el-row>
+
+						<el-row>
+							<el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+								<el-form ref="addAlleviationMemberForm" :rules="addAlleviationMemberRules" :model="addAlleviationMemberForm" :label-width="formLabelWidth" :label-position="labelPosition">
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="姓名" prop="name">
+											<el-input type="text" v-model="addAlleviationMemberForm.name" auto-complete="off"></el-input>
+										</el-form-item>
+									</el-col>
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="与户主关系" prop="relationships">
+											<el-select v-model="addAlleviationMemberForm.relationships" filterable placeholder="请选择">
+												<el-option v-for="item in addAlleviationMemberForm.relationship" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="家庭成员" prop="familys">
+											<el-select v-model="addAlleviationMemberForm.familys" filterable placeholder="请选择">
+												<el-option v-for="item in addAlleviationMemberForm.family" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="性别" prop="sexs">
+											<el-select v-model="addAlleviationMemberForm.sexs" filterable placeholder="请选择">
+												<el-option v-for="item in addAlleviationMemberForm.sex" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="出生日期" prop="birthday">
+											<el-date-picker v-model="addAlleviationMemberForm.birthday" align="right" type="date" placeholder="选择日期" :picker-options="addAlleviationMemberForm.pickerBirthday" @change="formatBirthday">
+											</el-date-picker>
+										</el-form-item>
+									</el-col>
+
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="名族" prop="ethnicitys">
+											<el-select v-model="addAlleviationMemberForm.ethnicitys" filterable placeholder="请选择">
+												<el-option v-for="item in addAlleviationMemberForm.ethnicity" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="健康状况" prop="healthConditions">
+											<el-select v-model="addAlleviationMemberForm.healthConditions" filterable placeholder="请选择">
+												<el-option v-for="item in addAlleviationMemberForm.healthCondition" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="身份证号" prop="name">
+											<el-input type="text" v-model="addAlleviationMemberForm.identityCard" auto-complete="off"></el-input>
+										</el-form-item>
+									</el-col>
+
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="联系方式" prop="telephone">
+											<el-input type="text" v-model="addAlleviationMemberForm.telephone" auto-complete="off"></el-input>
+										</el-form-item>
+									</el-col>
+
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="文化程度" prop="educations">
+											<el-select v-model="addAlleviationMemberForm.educations" filterable placeholder="请选择">
+												<el-option v-for="item in addAlleviationMemberForm.education" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="政治面貌" prop="politicals">
+											<el-select v-model="addAlleviationMemberForm.politicals" filterable placeholder="请选择">
+												<el-option v-for="item in addAlleviationMemberForm.political" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+									<el-col :xs="24" :sm="24" :md="12" :lg="12">
+										<el-form-item label="务工状况" prop="workStatuss">
+											<el-select v-model="addAlleviationMemberForm.workStatuss" filterable placeholder="请选择">
+												<el-option v-for="item in addAlleviationMemberForm.workStatus" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-form-item>
+									</el-col>
+
+									<el-col :xs="24" :sm="24" :md="24" :lg="24">
+										<el-form-item label="工作单位" prop="wordCompany">
+											<el-input type="text" v-model="addAlleviationMemberForm.wordCompany" auto-complete="off"></el-input>
+										</el-form-item>
+									</el-col>
+
+									<el-col :xs="24" :sm="24" :md="24" :lg="24">
+										<el-form-item label="个人证明照片" prop="personalProve">
+											<div class="up-file">
+												<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+													<img v-if="addAlleviationMemberForm.personalProve" :src="addAlleviationMemberForm.personalProve" class="avatar">
+													<i v-else class="el-icon-plus avatar-uploader-icon">个人证明照片</i>
+												</el-upload>
+											</div>
+										</el-form-item>
+									</el-col>
+
+								</el-form>
+								<div slot="footer" class="dialog-footer">
+									<el-button @click="dialogFormVisible = false">取 消</el-button>
+									<el-button type="primary" @click="saveYDFPBQCYInfo('form.alleviation.ydfpbqcyForm')">确 定</el-button>
+								</div>
+							</el-dialog>
+						</el-row>
+
+						<el-row>
+							<template>
+								<el-table ref="multipleTable" :data="addAlleviationMemberForm." border tooltip-effect="dark" style="width: 100%" @selection-change="handleYDFPBQCYTable">
+									<el-table-column type="selection" width="55">
+									</el-table-column>
+									<el-table-column prop="name" label="姓名">
+									</el-table-column>
+									<el-table-column prop="sex" label="性别">
+									</el-table-column>
+									<el-table-column prop="identityCard" label="身份证">
+									</el-table-column>
+									<el-table-column prop="relationship" label="与户主关系" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="family" label="家庭成员">
+									</el-table-column>
+									<el-table-column prop="birthday" label="出生日期">
+									</el-table-column>
+									<el-table-column prop="ethnicity" label="民族">
+									</el-table-column>
+									<el-table-column prop="workStatus" label="务工状况">
+									</el-table-column>
+									<el-table-column prop="healthCondition" label="健康状况">
+									</el-table-column>
+									<el-table-column prop="telephone" label="联系方式">
+									</el-table-column>
+								</el-table>
+							</template>
+						</el-row>
+
+					</el-collapse-item>

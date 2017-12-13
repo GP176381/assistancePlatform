@@ -1,0 +1,696 @@
+<template>
+	<div class="container">
+
+		<div class="pannel">
+			<el-form ref="form" :model="form" label-width="80px">
+				<el-row :xs="24" :sm="24" :md="24" :lg="24">
+					<el-button type="primary" @click="submitForm('form.baseInfoForm')" size="large">保存</el-button>
+					<el-button @click="resetForm('form.baseInfoForm')" size="large">重置</el-button>
+				</el-row>
+				<el-collapse v-model="activeNames">
+					<el-collapse-item name="1">
+
+						<template slot="title">
+							基本信息<i class="header-icon el-icon-information"></i>
+						</template>
+
+						<el-form :model="form.baseInfoForm" :rules="form.baseInfoRules" ref="form.baseInfoForm" label-width="150px" class="">
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="户主身份证" prop="identityCard">
+										<el-input type="text" v-model="form.baseInfoForm.identityCard" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="户主姓名" prop="name">
+										<el-input type="text" v-model="form.baseInfoForm.name" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="户籍性质" prop="householdNatures">
+										<el-select v-model="form.baseInfoForm.householdNatures" filterable placeholder="请选择">
+											<el-option v-for="item in form.baseInfoForm.householdNature" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="贫困属性" prop="povertyAttributes">
+										<el-select v-model="form.baseInfoForm.povertyAttributes" filterable placeholder="请选择">
+											<el-option v-for="item in form.baseInfoForm.povertyAttribute" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="脱贫标识" prop="povertyFlags">
+										<el-select v-model="form.baseInfoForm.povertyFlags" filterable placeholder="请选择">
+											<el-option v-for="item in form.baseInfoForm.povertyFlag" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="(预)脱贫年度" prop="antiPovertyYears">
+										<el-select v-model="form.baseInfoForm.antiPovertyYears" filterable placeholder="请选择">
+											<el-option v-for="item in form.baseInfoForm.antiPovertyYear" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="主要致贫原因" prop="mainPovertyReasons">
+										<el-select v-model="form.baseInfoForm.mainPovertyReasons" filterable placeholder="请选择">
+											<el-option v-for="item in form.baseInfoForm.mainPovertyReason" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="家庭全年收入 (元)" prop="annualIncome">
+										<el-input type="text" v-model="form.baseInfoForm.annualIncome" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="联系方式" prop="telephone">
+										<el-input type="text" v-model="form.baseInfoForm.telephone" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="产业就业发展(人)" prop="cyjyfz">
+										<el-input type="text" v-model="form.baseInfoForm.cyjyfz" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="低保政策兜底(人)" prop="dbzcdd">
+										<el-input type="text" v-model="form.baseInfoForm.dbzcdd" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="医疗救助扶持(人)" prop="yljzfc">
+										<el-input type="text" v-model="form.baseInfoForm.yljzfc" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="灾后重建帮扶(人)" prop="zhcjbf">
+										<el-input type="text" v-model="form.baseInfoForm.zhcjbf" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+							</el-row>
+
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="户籍地址" prop="householdAddresss">
+										<el-select v-model="form.baseInfoForm.householdAddresss" filterable placeholder="请选择">
+											<el-option v-for="item in form.baseInfoForm.householdAddress" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.baseInfoForm.householdAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.baseInfoForm.householdAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.baseInfoForm.householdAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.baseInfoForm.householdAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.baseInfoForm.householdAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.baseInfoForm.householdAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-input type="text" v-model="form.baseInfoForm.householdAddresss" auto-complete="off"></el-input>
+								</el-col>
+							</el-row>
+						</el-form>
+					</el-collapse-item>
+
+					<el-collapse-item name="2">
+						<template slot="title">
+							易地扶贫搬迁补助资格信息<i class="header-icon el-icon-information"></i>
+						</template>
+						<el-form :model="form.ydfpbzForm" :rules="form.ydfpbzRules" ref="form.ydfpbzForm" label-width="150px" class="">
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="8">
+									<el-form-item label="计划实施年度" prop="planYears">
+										<el-select v-model="form.ydfpbzForm.planYears" filterable placeholder="请选择">
+											<el-option v-for="item in form.ydfpbzForm.planYear" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="8">
+									<el-form-item label="安置形式" prop="relocateTypes">
+										<el-select v-model="form.ydfpbzForm.relocateTypes" filterable placeholder="请选择">
+											<el-option v-for="item in form.ydfpbzForm.relocateType" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="8">
+									<el-form-item label="安置方式" prop="relocateModes">
+										<el-col :xs="24" :sm="12" :md="8" :lg="12">
+											<el-select v-model="form.ydfpbzForm.relocateModes" filterable placeholder="请选择">
+												<el-option v-for="item in form.ydfpbzForm.relocateMode" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-col>
+										<el-col :xs="24" :sm="12" :md="8" :lg="12">
+											<el-select v-model="form.ydfpbzForm.relocateModes" filterable placeholder="请选择">
+												<el-option v-for="item in form.ydfpbzForm.relocateMode" :key="item.value" :label="item.label" :value="item.value">
+												</el-option>
+											</el-select>
+										</el-col>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-form-item label="">
+										<el-checkbox v-model="form.ydfpbzForm.noHouse">是否无房户</el-checkbox>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="8">
+									<el-form-item label="稳定脱贫措施" prop="measures">
+										<el-select v-model="form.ydfpbzForm.measures" filterable placeholder="请选择">
+											<el-option v-for="item in form.ydfpbzForm.measure" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+							</el-row>
+
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="老宅地址" prop="oldAddresss">
+										<el-select v-model="form.ydfpbzForm.oldAddresss" filterable placeholder="请选择">
+											<el-option v-for="item in form.ydfpbzForm.oldAddress" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.oldAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.oldAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.oldAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.oldAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.oldAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.oldAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-input type="text" v-model="form.ydfpbzForm.oldAddresss" auto-complete="off"></el-input>
+								</el-col>
+							</el-row>
+
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="新宅地址" prop="newAddresss">
+										<el-select v-model="form.ydfpbzForm.newAddresss" filterable placeholder="请选择">
+											<el-option v-for="item in form.ydfpbzForm.newAddress" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.newAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.newAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.newAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.newAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="4">
+									<el-select v-model="form.ydfpbzForm.newAddresss" filterable placeholder="请选择">
+										<el-option v-for="item in form.ydfpbzForm.newAddress" :key="item.value" :label="item.label" :value="item.value">
+										</el-option>
+									</el-select>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-input type="text" v-model="form.ydfpbzForm.newAddresss" auto-complete="off"></el-input>
+								</el-col>
+							</el-row>
+						</el-form>
+					</el-collapse-item>
+
+					<el-collapse-item name="3">
+						<template slot="title">
+							申请材料<i class="header-icon el-icon-information"></i>
+						</template>
+						<form :model="form.rereqForm" :rules="form.ydfpbzForm" ref="form.ydfpbzForm" label-width="150px" class="">
+							<el-row :gutter="10" type="flex">
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.idcardImg" :src="idcardImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">身份证正面</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.idcardBehindImg" :src="idcardBehindImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">身份证反面</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.hkbImg" :src="hkbImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">户口本</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.bqsqzsImg" :src="bqsqzsImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">搬迁申请证书</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.bqsqzsImg" :src="bqsqzsImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">搬迁申请证书</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.chyjyImg" :src="chyjyImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">村会议纪要</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.chyImg" :src="chyImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">村会议照片</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.cgsImg" :src="cgsImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">村公示照片</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.cgsclImg" :src="cgsclImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">村公示材料</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="6" :lg="4">
+									<div class="up-file">
+										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+											<img v-if="form.rereqForm.bqdxqrbImg" :src="bqdxqrbImg" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon">搬迁对象确认表</i>
+										</el-upload>
+										<!--<i class="el-icon-delete"></i>-->
+									</div>
+								</el-col>
+							</el-row>
+						</form>
+					</el-collapse-item>
+
+					<el-collapse-item name="4">
+						<template slot="title">
+							账户信息<i class="header-icon el-icon-information"></i>
+						</template>
+
+						<el-form :model="form.accountInfoForm" :rules="form.accountInfoRules" ref="form.accountInfoForm" label-width="150px" class="">
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="持卡人/机构" prop="accountOwner">
+										<el-input type="text" v-model="form.accountInfoForm.accountOwner" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="收款人手机" prop="accountPhone">
+										<el-input type="text" v-model="form.accountInfoForm.accountPhone" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="证件号" prop="accountIdcard">
+										<el-input type="text" v-model="form.accountInfoForm.accountIdcard" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="开户银行" prop="accountBanks">
+										<el-select v-model="form.accountInfoForm.accountBanks" filterable placeholder="请选择">
+											<el-option v-for="item in form.accountInfoForm.accountBank" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="银行卡号" prop="accountCardnumber">
+										<el-input type="text" v-model="form.accountInfoForm.accountCardnumber" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="确认卡号" prop="accountCardnumber">
+										<el-input type="text" v-model="form.accountInfoForm.accountCardnumber" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="与户主关系" prop="accountRelations">
+										<el-select v-model="form.accountInfoForm.accountRelations" filterable placeholder="请选择">
+											<el-option v-for="item in form.accountInfoForm.accountRelation" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</el-form-item>
+								</el-col>
+							</el-row>
+						</el-form>
+					</el-collapse-item>
+
+					<el-collapse-item name="5">
+						<template slot="title">
+							帮扶责任人<i class="header-icon el-icon-information"></i>
+						</template>
+
+						<el-form :model="form.bfzrrForm" :rules="form.bfzrrRules" ref="form.bfzrrForm" label-width="150px" class="">
+							<el-row :gutter="30" type="flex">
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="联系部门" prop="contactLeader">
+										<el-input type="text" v-model="form.bfzrrForm.contactLeader" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="联系人员" prop="contactDepartment">
+										<el-input type="text" v-model="form.bfzrrForm.contactDepartment" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+								<el-col :xs="24" :sm="12" :md="8" :lg="6">
+									<el-form-item label="联系电话" prop="contactPerson">
+										<el-input type="text" v-model="form.bfzrrForm.contactPerson" auto-complete="off"></el-input>
+									</el-form-item>
+								</el-col>
+							</el-row>
+						</el-form>
+					</el-collapse-item>
+
+				</el-collapse>
+			</el-form>
+		</div>
+
+	</div>
+
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				activeNames: ['1', '2', '3', '4', '5'],
+				form: {
+					baseInfoForm: {
+						identityCard: '',
+						name: '',
+						householdNatures: '',
+						povertyAttributes: '',
+						povertyFlags: '',
+						antiPovertyYears: '',
+						mainPovertyReasons: '',
+						annualIncome: '',
+						telephone: '',
+						cyjyfz: '',
+						dbzcdd: '',
+						yljzfc: '',
+						zhcjbf: '',
+						householdAddresss: '',
+						householdNature: [],
+						povertyAttribute: [],
+						povertyFlag: [],
+						antiPovertyYear: [],
+						mainPovertyReason: [],
+						householdAddress: []
+					},
+					baseInfoRules: {
+						identityCard: [{
+								required: true,
+								message: '请输户主身份证',
+								trigger: 'blur'
+							},
+							{
+								min: 3,
+								max: 5,
+								message: '长度在18个字符',
+								trigger: 'blur'
+							}
+						],
+						name: [{
+							required: true,
+							message: '请输入户主姓名',
+							trigger: 'blur'
+						}],
+						povertyAttributes: [{
+							required: true,
+							message: '请选择贫困属性',
+							trigger: 'blur'
+						}],
+						telephone: [{
+							required: true,
+							message: '请输入联系方式',
+							trigger: 'blur'
+						}, {
+							validator: 'validatePhoneUnique',
+							trigger: 'change'
+						}]
+					},
+					ydfpbzForm: {
+						planYears: '',
+						relocateTypes: '',
+						relocateModes: '',
+						noHouse: '',
+						measures: '',
+						planYear: [],
+						relocateType: [],
+						relocateMode: [],
+						measure: [],
+						oldAddresss: '',
+						newAddresss: '',
+						oldAddress: [],
+						newAddress: []
+					},
+					ydfpbzRules: {
+						planYears: [{
+							required: true,
+							message: '请选择计划实施年度',
+							trigger: 'blur'
+						}],
+						relocateTypes: [{
+							required: true,
+							message: '请选择安置形式',
+							trigger: 'blur'
+						}],
+						relocateModes: [{
+							required: true,
+							message: '请选择安置方式',
+							trigger: 'blur'
+						}],
+						newAddresss: [{
+							required: true,
+							message: '请选择老宅住址',
+							trigger: 'blur'
+						}]
+					},
+					rereqForm: {
+						idcardImg: '',
+						idcardBehindImg: '',
+						hkbImg: '',
+						bqsqzsImg: '',
+						chyjyImg: '',
+						chyImg: '',
+						cgsImg: '',
+						cgsclImg: '',
+						bqdxqrbImg: '',
+					},
+					accountInfoForm: {
+						accountOwner: '',
+						accountPhone: '',
+						accountIdcard: '',
+						accountBanks: '',
+						accountBank: [],
+						accountCardnumber: '',
+						accountRelations: '',
+						accountRelation: []
+					},
+					accountInfoRules: {
+						accountOwner: [{
+							required: true,
+							message: '请输户持卡人/机构',
+							trigger: 'blur'
+						}],
+						accountPhone: [{
+							required: true,
+							message: '请输户收款人手机',
+							trigger: 'blur'
+						}],
+						accountIdcard: [{
+							required: true,
+							message: '请输户证件号',
+							trigger: 'blur'
+						}],
+						accountBanks: [{
+							required: true,
+							message: '请选择开户银行',
+							trigger: 'blur'
+						}],
+						accountCardnumber: [{
+							required: true,
+							message: '请输户银行卡号',
+							trigger: 'blur'
+						}],
+						accountRelations: [{
+							required: true,
+							message: '请选择与户主关系',
+							trigger: 'blur'
+						}]
+					},
+					bfzrrForm: {
+						contactLeader: '',
+						contactDepartment: '',
+						contactPerson: ''
+					},
+				}
+			};
+		},
+		methods: {
+			submitForm(formName) {
+				this.$refs[formName].validate((valid) => {
+					if(valid) {
+						alert('submit!');
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				});
+			},
+			resetForm(formName) {
+				this.$refs[formName].resetFields();
+			},
+			handleAvatarSuccess(res, file) {
+				this.idcardImg = URL.createObjectURL(file.raw);
+			},
+			beforeAvatarUpload(file) {
+				const isJPG = file.type === 'image/jpeg';
+				const isLt2M = file.size / 1024 / 1024 < 2;
+
+				if(!isJPG) {
+					this.$message.error('上传头像图片只能是 JPG 格式!');
+				}
+				if(!isLt2M) {
+					this.$message.error('上传头像图片大小不能超过 2MB!');
+				}
+				return isJPG && isLt2M;
+			}
+		}
+	}
+</script>
+
+<style>
+	.el-row {
+		flex-wrap: wrap;
+		margin-bottom: 20px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	/*.el-col {
+		border-radius: 4px;
+	}*/
+	
+	.avatar-uploader .el-upload {
+		border: 1px dashed #d9d9d9;
+		border-radius: 6px;
+		cursor: pointer;
+		position: relative;
+		overflow: hidden;
+	}
+	
+	.avatar-uploader .el-upload:hover {
+		border-color: #20a0ff;
+	}
+	
+	.avatar-uploader-icon {
+		font-size: 28px;
+		color: #8c939d;
+		width: 250px;
+		height: 178px;
+		line-height: 178px;
+		text-align: center;
+	}
+	
+	.avatar {
+		width: 250px;
+		height: 178px;
+		display: block;
+	}
+	/*.up-file {
+		position: relative;
+		width: 250px;
+		height: 178px;
+	}*/
+	
+	.up-file .el-icon-delete {
+		/*position: absolute;
+		right: 0;
+		top: 0;*/
+	}
+</style>
